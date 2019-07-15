@@ -2,28 +2,25 @@
 ; https://github.com/b-/keyboard-customizer
 ; Released into the Public Domain via CC0 https://creativecommons.org/share-your-work/public-domain/cc0/
 
-
+#SingleInstance Force
+#InstallKeybdHook
 #NoEnv  ; Recommended for performance and compatibility with future AutoHotkey releases.
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
+
+Menu, Tray, Icon, %A_WorkingDir%/caps-off.png
+SetCapsLockState, alwaysoff
 
 Tab & F1::Return ; Mentioned in the hotkeys docs for UP
 *Tab::Send {Blind}{Tab} ; Send it explicitly when no other key is pressed before letting go, including any modifiers being held
 
 #If GetKeyState("Tab", "p") ; Autohotkey_L directive for enabling following mappings when key is physically down
-
-h::Left
-l::Right
-k::Up
-j::Down
-
+  h::Left
+  l::Right
+  k::Up
+  j::Down
 #If
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-; Original author: fwompner gmail com
-#InstallKeybdHook
-SetCapsLockState, alwaysoff
 *Capslock::
 Send {LControl Down}
 KeyWait, CapsLock
@@ -47,7 +44,6 @@ GetCapsState(){
   }
   return cstate
 }
-GetCapsState()
 ToggleCaps() {
   if GetCapsState() {
     SetCapsLockState, alwaysoff

@@ -10,7 +10,7 @@ This AHK will:
         - (e.g., "Caps Lock + C" will be equivalent to "Ctrl + C")
   - Remap Tab to *both* Tab and Control
     - Like above, if you *press and release* Tab it will emit Tab
-    - If you *press and hold* tab, your `H` `J` `K` `L` keys become arrows ala Vim (`< V ^ >`)
+    - If you *press and hold* tab, your `H` `J` `K` `L` keys become arrows ala Vim (`←` `↓` `↑` `↓`)
   - Remap LShift + RShift to Caps Lock
   - Displays an icon in the system tray that shows your current caps lock state.
 
