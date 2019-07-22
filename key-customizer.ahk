@@ -10,11 +10,11 @@
 SendMode Input  ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
-;functions
+;;;;;;;;;;;;;functions;;;;;;;;;;;;
 SetCaps(state) {
-; Set the caps lock state
-; The keyboard I'm coding this on doesn't have a capslock LED. Don't ask me why; it's a stupid laptop.
-; Therefore I am using the tray icon as one.
+  ; Set the caps lock state
+  ; The keyboard I'm coding this on doesn't have a capslock LED. Don't ask me why; it's a stupid laptop.
+  ; Therefore I am using the tray icon as one.
   if (state = 0) {
     SetCapsLockState, alwaysoff ; Caps has to either be "alwaysoff" or "alwayson" because of the mappings involving it.
     Menu, Tray, Icon, %A_WorkingDir%/caps-off.png
@@ -26,11 +26,9 @@ SetCaps(state) {
     Menu, Tray, Tip, Key Customizer (CAPS ON)
   }
 }
-  
 ToggleCaps() {
-; Toggle caps lock
-; This function is because we cannot simply send a Capslock keypress to reliably toggle the capslock state, due to remapping the key.
-
+  ; Toggle caps lock
+  ; This function is because we cannot simply send a Capslock keypress to reliably toggle the capslock state, due to remapping the key.
   if (GetKeyState("Capslock", "T") = 1) { ; if caps lock is on
     SetCaps(0) ; turn it off
   } else if (GetKeyState("Capslock", "T") = 0) ; else if caps lock is off
@@ -39,11 +37,12 @@ ToggleCaps() {
   }
 }
 ;;;;;;;;;;;;;;
+
 ; Turn off Caps on start: I can't seem to reliably get the state of caps lock upon program start, so I'm just manually setting it to off
 SetCaps(0) 
 
-*Tab::Send {Blind}{Tab} ; Send it explicitly when no other key is pressed before letting go, including any modifiers being held
-
+;tab/arrow settings
+*Tab::Send {Blind}{Tab} ; Send tab explicitly when no other key is pressed before letting go, including any modifiers being held
 #If GetKeyState("Tab", "p") ; Autohotkey_L directive for enabling following mappings when key is physically down
   h::Left
   l::Right
@@ -54,11 +53,17 @@ SetCaps(0)
 
 *Capslock::
   Send {LControl Down}
-  KeyWait, CapsLock
-  Send {LControl Up}
-  if ( A_PriorKey = "CapsLock" )
+  sendEsc := true ; initialize it as true.
+  KeyWait, CapsLock, T0.25 ; Wait for CapsLock to be released. timeout after 250ms
+  if ( ErrorLevel >= 1) ; ErrorLevel = 1 if timeout. That is, if we never released caps
   {
-      Send {Esc}
+    sendEsc := false ; if we don't release caps quickly, we shouldn't press once we finally release it.
+  }
+  KeyWait, CapsLock  ; We still need to wait for the key to be released; KeyWait is synchronous, so the program pauses while we do this.
+  Send {LControl Up}
+  if ( A_PriorKey = "CapsLock" ) && ( sendEsc == true ) ; if we never pressed another key AND if we didn't set sendEsc to false by timing out
+  {
+      Send {Esc} ; only then do we send esc.
   }
 return
 
