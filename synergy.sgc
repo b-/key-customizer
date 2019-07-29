@@ -1,0 +1,41 @@
+section: screens
+	Brians-MBP.home:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		switchCorners = none 
+		switchCornerSize = 0
+	Syed-Laptop:
+		halfDuplexCapsLock = false
+		halfDuplexNumLock = false
+		halfDuplexScrollLock = false
+		xtestIsXineramaUnaware = false
+		switchCorners = none 
+		switchCornerSize = 0
+end
+
+section: aliases
+end
+
+section: links
+	Brians-MBP.home:
+		right = Syed-Laptop
+	Syed-Laptop:
+		left = Brians-MBP.home
+end
+
+section: options
+	relativeMouseMoves = false
+	screenSaverSync = true
+	win32KeepForeground = false
+	disableLockToScreen = false
+	clipboardSharing = true
+	clipboardSharingSize = 32768
+	switchDelay = 250
+	switchCorners = none +top-left +top-right +bottom-left +bottom-right 
+	switchCornerSize = 1
+	mousebutton(Alt+Shift+1) = switchInDirection(left)
+	mousebutton(Alt+Shift+2) = switchInDirection(right)
+end
+
