@@ -15,6 +15,8 @@ SetCapsIcon(InitialCapsState)
 ;;;;; Turn off Caps on start: I can't seem to reliably get the state of caps lock upon program start, so I'm just manually setting it to off
 ;;;;SetCaps(0) 
 
+SetNumLockState, AlwaysOn
+NumLock::Delete ; remap numlock to what clears calc on windows
 
 
 ;;;;;;;;;;;;;functions;;;;;;;;;;;;
