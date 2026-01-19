@@ -1,4 +1,4 @@
-# Brian's Key Customizer Script
+# bri's Key Customizer Script
 
 This is basically just a stupid simple AutoHotkey script that I put together from a few pages and modified a little bit, to remap my keyboard on Windows the way I map it on macOS using Karabiner-Elements.
 

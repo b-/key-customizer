@@ -1,5 +1,5 @@
 section: screens
-	Brians-MBP.home:
+	bri-MBP.home:
 		halfDuplexCapsLock = false
 		halfDuplexNumLock = false
 		halfDuplexScrollLock = false
@@ -19,10 +19,10 @@ section: aliases
 end
 
 section: links
-	Brians-MBP.home:
+	bri-MBP.home:
 		right = Syed-Laptop
 	Syed-Laptop:
-		left = Brians-MBP.home
+		left = bri-MBP.home
 end
 
 section: options
